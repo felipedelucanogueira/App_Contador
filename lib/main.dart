@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: Center(
             child: Text(
           'Contador',
