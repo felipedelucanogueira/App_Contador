@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'counter.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -13,9 +15,13 @@ class MyApp extends StatelessWidget {
       appBar: AppBar(
         title: Center(
             child: Text(
-          'Placar',
+          'Contador',
         )),
       ),
-    body: Column(),),);
+    body: CounterScreen(),),);
   }
 }
+
+
+
+
