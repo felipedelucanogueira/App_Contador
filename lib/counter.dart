@@ -6,8 +6,24 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
-  var counter = 0;
 
+
+  var resultado = 0;
+
+  void _operation( Function (int, int) func) {
+    setState(() {
+      resultado = func(resultado , 1);
+    });
+  }
+    int add(num1,num2){
+      return num1 + num2;
+    }
+    
+    int sub(num1,num2){
+      return num1 - num2;
+    }
+  
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +40,7 @@ class _CounterScreenState extends State<CounterScreen> {
               )),
           child: Center(
               child: Text(
-            "$counter",
+            "$resultado",
             style: TextStyle(
               fontSize: 50,
             ),
@@ -36,25 +52,36 @@ class _CounterScreenState extends State<CounterScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            FloatingActionButton(
-                backgroundColor: Colors.black,
-                child: Icon(Icons.exposure_minus_1),
-                onPressed: () {
-                  setState(() {
-                    counter -= 1;
-                  });
-                }),
-            FloatingActionButton(
-                backgroundColor: Colors.black,
-                child: Icon(Icons.exposure_plus_1),
-                onPressed: () {
-                  setState(() {
-                    counter += 1;
-                  });
-                }),
+            OperationFloatActionButton(
+              icon: Icon(Icons.exposure_minus_1),
+              func: () {
+                setState(() {
+                  _operation(sub);
+                });
+              },
+            ),
+            OperationFloatActionButton(
+              icon: Icon(Icons.exposure_plus_1),
+              func: () {
+                _operation(add);
+              },
+            ),
           ],
         )
       ],
     );
+  }
+}
+
+class OperationFloatActionButton extends StatelessWidget {
+  final Function func;
+  final Widget icon;
+
+  OperationFloatActionButton({Key key, this.func, this.icon}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+        backgroundColor: Colors.black, child: icon, onPressed: func);
   }
 }
